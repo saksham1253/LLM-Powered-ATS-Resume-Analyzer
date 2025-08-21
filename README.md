@@ -47,8 +47,8 @@ The primary goal of this project is to assist job seekers in improving their res
 
 ## Set up of Environment Variables
 
-Create a **.env** file in the root directory.
-Add your Google API Key in **.env** file:
+- Create a **.env** file in the root directory.
+- Add your Google API Key in **.env** file:
    ```bash
    GOOGLE_API_KEY=your_api_key_here
 
