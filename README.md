@@ -56,13 +56,34 @@ The primary goal of this project is to assist job seekers in improving their res
 
 ## Run the Streamlit Application
 
-```bash
-streamlit run app.py
+- Write this in the terminal
+   ```bash
+   streamlit run app.py
 
 ---
 
-####Open the application in your browser
+## 📂 Project Structure
 
+📦 ATS Resume Analyzer
+├── 📄 app.py                # Main Streamlit application
+├── 📄 requirements.txt      # Python dependencies
+├── 📄 .env                  # API Key (not pushed to GitHub)
+└── 📄 README.md             # Project documentation
+
+---
+
+## Future Improvements
+
+- Support for multiple resume formats (DOCX, TXT).
+- More advanced keyword extraction and ranking.
+- Multi-job comparison feature.
+- Deployment on cloud (Streamlit Cloud, GCP, or AWS).
+
+---
+
+## Contributing
+
+**Contributions are welcome. Please fork the repository and submit a pull request for any enhancements or bug fixes**.
 
 
 
