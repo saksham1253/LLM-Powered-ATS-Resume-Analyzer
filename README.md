@@ -43,7 +43,6 @@ The primary goal of this project is to assist job seekers in improving their res
    ```bash
    pip install -r requirements.txt
 
-
 ---
 
 ## Set up of Environment Variables
@@ -53,13 +52,12 @@ Add your Google API Key in **.env** file:
    ```bash
    GOOGLE_API_KEY=your_api_key_here
 
-
 ---
 
 ## Run the Streamlit Application
-   ```bash
-   streamlit run app.py
 
+```bash
+streamlit run app.py
 
 ---
 
