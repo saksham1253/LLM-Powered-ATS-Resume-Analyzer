@@ -34,6 +34,24 @@ The primary goal of this project is to assist job seekers in improving their res
    ```bash
    git clone https://github.com/saksham1253/LLM-Powered-ATS-Resume-Analyzer.git
    cd LLM-Powered-ATS-Resume-Analyzer
+2. Create and activate a virtual environment
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Linux/Mac
+   venv\Scripts\activate      # On Windows
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+
+
+---
+
+## Set up of Environment Variables and Running Streamlit Application
+
+Create a **.env** file in the root directory.
+Add your Google API Key in **.env** file:
+```bash
+GOOGLE_API_KEY=your_api_key_here
 
    git clone https://github.com/your-username/ats-resume-analyzer.git
    cd ats-resume-analyzer
