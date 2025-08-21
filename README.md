@@ -46,12 +46,26 @@ The primary goal of this project is to assist job seekers in improving their res
 
 ---
 
-## Set up of Environment Variables and Running Streamlit Application
+## Set up of Environment Variables
 
 Create a **.env** file in the root directory.
 Add your Google API Key in **.env** file:
-```bash
-GOOGLE_API_KEY=your_api_key_here
+   ```bash
+   GOOGLE_API_KEY=your_api_key_here
 
-   git clone https://github.com/your-username/ats-resume-analyzer.git
-   cd ats-resume-analyzer
+
+---
+
+## Run the Streamlit Application
+   ```bash
+   streamlit run app.py
+
+
+---
+
+####Open the application in your browser
+
+
+
+
+   
