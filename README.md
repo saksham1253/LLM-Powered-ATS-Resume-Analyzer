@@ -65,10 +65,10 @@ The primary goal of this project is to assist job seekers in improving their res
 ## 📂 Project Structure
 
 📦 ATS Resume Analyzer
-├── 📄 app.py                # Main Streamlit application
-├── 📄 requirements.txt      # Python dependencies
-├── 📄 .env                  # API Key (not pushed to GitHub)
-└── 📄 README.md             # Project documentation
+- ├── 📄 app.py                # Main Streamlit application
+- ├── 📄 requirements.txt      # Python dependencies
+- ├── 📄 .env                  # API Key (not pushed to GitHub)
+- ├── 📄 README.md             # Project documentation
 
 ---
 
