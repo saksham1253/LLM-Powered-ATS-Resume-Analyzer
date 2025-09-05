@@ -1,40 +1,46 @@
 from dotenv import load_dotenv
 load_dotenv()
 import streamlit as st
-from PIL import Image
 import google.generativeai as genai
-import pdf2image as p2i
+import pdfplumber
 import os
-import io
-import base64
 
+# ----------------------------
+# Gemini API Setup
+# ----------------------------
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-def get_gemini_response(input,pdf_content,prompt):
-    model=genai.GenerativeModel("gemini-1.5-flash")
-    response=model.generate_content([input,pdf_content[0],prompt])
+# ----------------------------
+# Gemini Response Function
+# ----------------------------
+def get_gemini_response(input_text, resume_text, prompt):
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content([input_text, resume_text, prompt])
     return response.text
 
+# ----------------------------
+# PDF Text Extractor
+# ----------------------------
 def input_pdf_setup(uploaded_file):
-    # convert pdf to image
     if uploaded_file is not None:
-        images=p2i.convert_from_bytes(uploaded_file.read())
-        first_page=images[0]
-
-        #convert to bytes
-        img_byte_arr=io.BytesIO()
-        first_page.save(img_byte_arr,format='JPEG')
-        img_byte_arr=img_byte_arr.getvalue()
-
-        pdf_parts=[{"mime_type":"image/jpeg","data":base64.b64encode(img_byte_arr).decode()}]#encode to base64
-        return pdf_parts
+        text = ""
+        with pdfplumber.open(uploaded_file) as pdf:
+            for page in pdf.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text + "\n"
+        return text
     else:
-        raise FileNotFoundError("NO file Uploaded")
+        raise FileNotFoundError("No file uploaded")
 
+# ----------------------------
 # Page Config
+# ----------------------------
 st.set_page_config(page_title="ATS Resume Analyzer", layout="centered")
 
+# ----------------------------
 # Custom CSS
+# ----------------------------
 st.markdown("""
 <style>
 body {
@@ -106,11 +112,10 @@ if uploaded_file is not None:
     st.success("✅ PDF uploaded Successfully")
 st.markdown('</div>', unsafe_allow_html=True)
 
-
 # ----------------------------
 # Action Buttons with spacing
 # ----------------------------
-col1, col2, col3 = st.columns([1,1,1])
+col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
     submit1 = st.button("📄 Review my resume")
@@ -144,15 +149,15 @@ You are an skilled ATS scanner with a deep understanding in one of the field of 
 your task is to evaluate the resume against the job description. Give me the percentage
 of the matching of resume with the job description. first the output should come as percentage
 and then keywords missing in the resume due to which the percentage score is less than 100.make sure you doesn't give your title
-"""
+and give the percentage match in a very big font"""
 
 # ----------------------------
 # Actions
 # ----------------------------
 if submit1:
     if uploaded_file is not None:
-        pdf_content = input_pdf_setup(uploaded_file)
-        response = get_gemini_response(input_prompt1, pdf_content, input_text)
+        resume_text = input_pdf_setup(uploaded_file)
+        response = get_gemini_response(input_text, resume_text, input_prompt1)
         st.subheader("📄 The Response is:")
         st.write(response)
     else:
@@ -160,8 +165,8 @@ if submit1:
 
 elif submit2:
     if uploaded_file is not None:
-        pdf_content = input_pdf_setup(uploaded_file)
-        response = get_gemini_response(input_prompt2, pdf_content, input_text)
+        resume_text = input_pdf_setup(uploaded_file)
+        response = get_gemini_response(input_text, resume_text, input_prompt2)
         st.subheader("✨ The Response is:")
         st.write(response)
     else:
@@ -169,8 +174,8 @@ elif submit2:
 
 elif submit3:
     if uploaded_file is not None:
-        pdf_content = input_pdf_setup(uploaded_file)
-        response = get_gemini_response(input_prompt3, pdf_content, input_text)
+        resume_text = input_pdf_setup(uploaded_file)
+        response = get_gemini_response(input_text, resume_text, input_prompt3)
         st.subheader("📊 Percentage Match:")
         st.write(response)
     else:
